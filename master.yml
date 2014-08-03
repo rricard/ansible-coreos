@@ -1,0 +1,5 @@
+etcd_host: 172.17.8.101
+etcd_port: 4001
+ansible_ssh_host: 127.0.0.1
+ansible_ssh_port: 2222
+namespace: development

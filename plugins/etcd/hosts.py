@@ -3,32 +3,36 @@
 import os
 import etcd
 import json
+import yaml
 
 
 def last_key_element(key):
     return key.split('/')[-1]
 
-master = json.loads(
-    os.getenv('ETCD_MASTER', '{"ansible_ssh_host":"127.0.0.1"}')
-)
-host = os.getenv('ETCD_HOST', master['ansible_ssh_host'])
-port = os.getenv('ETCD_PORT', 4001)
-ssh_host = os.getenv('SSH_HOST', host)
-ssh_port = os.getenv('SSH_PORT', 22)
-namespace = os.getenv('ETCD_NAMESPACE', 'ansible')
+master_file = open(os.getenv('MASTER_CFG', './master.yml'))
+master = yaml.safe_load(master_file)
+master_file.close()
 
-client = etcd.Client(host=host, port=port)
+client = etcd.Client(host=master['etcd_host'], port=master['etcd_port'])
 
 output = {
     '_meta': {
         'hostvars': {
-            'etcd_master': master
+            'master': master
         }
+    },
+    'coreos': {
+        'hosts': [
+            'master'
+        ]
     }
 }
 
 try:
-    groups = client.node.get('/%s/groups' % (namespace), recursive=True)
+    groups = client.node.get(
+        '/%s/groups' % (master['namespace']),
+        recursive=True
+    )
 
     for group in groups.node.children:
         group_name = last_key_element(group.key)
