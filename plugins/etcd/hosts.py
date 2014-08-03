@@ -9,7 +9,7 @@ def last_key_element(key):
     return key.split('/')[-1]
 
 master = json.loads(
-    os.get_env('ETCD_MASTER', '{"ansible_ssh_host":"127.0.0.1"}')
+    os.getenv('ETCD_MASTER', '{"ansible_ssh_host":"127.0.0.1"}')
 )
 host = os.getenv('ETCD_HOST', master['ansible_ssh_host'])
 port = os.getenv('ETCD_PORT', 4001)
