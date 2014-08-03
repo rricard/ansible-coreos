@@ -25,7 +25,7 @@ for group in groups.node.children:
         output[group_name] = {'hosts': []}
         for host in group.children:
             host_name = last_key_element(host.key)
-            output['meta']['hostvars'].set(host_name, json.load(host.value))
+            output['_meta']['hostvars'][host_name] = json.loads(host.value)
             output[group_name]['hosts'].append(host_name)
     else:
         output[group_name] = json.loads(group.value)
