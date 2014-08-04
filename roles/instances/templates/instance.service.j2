@@ -5,9 +5,9 @@ Requires=docker.service
 
 [Service]
 {% if persists %}
-ExecStart=/usr/bin/docker run --name instance-{{ item }} -i {{ image }}
+ExecStart=/usr/bin/docker run --name {{ item }}.service -i {{ image }}
 {% else %}
-ExecStart=/usr/bin/docker run -rm --name instance-{{ item }} -i {{ image }}
+ExecStart=/usr/bin/docker run --rm --name {{ item }}.service -i {{ image }}
 ExecStop=/usr/bin/docker rm -f instance-{{ item }}
 {% endif %}
 

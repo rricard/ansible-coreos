@@ -1,0 +1,10 @@
+---
+# Patch CoreOS to accept python commands from Ansible
+- hosts: coreos
+  gather_facts: False
+  tasks:
+  - name: Download a portable pypy
+    raw: curl -L curl -L https://bitbucket.org/squeaky/portable-pypy/downloads/pypy-2.3.1-linux_x86_64-portable.tar.bz2 > /home/core/pypy.tar.bz2
+  - name: Decompress this portable pypy
+    raw: cd /home/core; tar xjf pypy.tar.bz2
+    ignore_errors: True

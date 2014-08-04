@@ -37,11 +37,12 @@ try:
     for group in groups.node.children:
         group_name = last_key_element(group.key)
         if group.is_directory:
-            output[group_name] = {'hosts': []}
-            for host in group.children:
-                host_name = last_key_element(host.key)
-                output['_meta']['hostvars'][host_name] = json.loads(host.value)
-                output[group_name]['hosts'].append(host_name)
+            if group.is_collection:
+                output[group_name] = {'hosts': []}
+                for host in group.children:
+                    host_name = last_key_element(host.key)
+                    output['_meta']['hostvars'][host_name] = json.loads(host.value)
+                    output[group_name]['hosts'].append(host_name)
         else:
             output[group_name] = json.loads(group.value)
 except KeyError:

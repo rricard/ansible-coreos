@@ -1,0 +1,11 @@
+---
+- hosts: master
+  gather_facts: False
+  roles:
+  - role: instances
+    name: simple
+    image: ratasheep/ubuntu-sshd
+    instances:
+    - ssh.0
+    - ssh.1
+    - ssh.2
