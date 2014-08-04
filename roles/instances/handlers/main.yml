@@ -1,0 +1,9 @@
+---
+- name: roll update
+  shell: >
+        export SERVICES="{{ item }}.service {{ item }}.sidekick.service"
+        /usr/bin/fleetctl stop $SERVICES || true;
+        /usr/bin/fleetctl destroy $SERVICES || true;
+        /usr/bin/fleetctl submit $SERVICES &&
+        /usr/bin/fleetctl start $SERVICES
+  with_items: instances
