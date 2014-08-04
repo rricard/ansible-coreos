@@ -8,7 +8,7 @@ Requires=docker.service
 ExecStart=/usr/bin/docker run --name {{ item }}.service -i {{ image }}
 {% else %}
 ExecStart=/usr/bin/docker run --rm --name {{ item }}.service -i {{ image }}
-ExecStop=/usr/bin/docker rm -f instance-{{ item }}
+ExecStop=/usr/bin/docker rm -f {{ item }}.service
 {% endif %}
 
 [X-Fleet]
