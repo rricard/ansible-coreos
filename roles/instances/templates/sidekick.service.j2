@@ -3,7 +3,7 @@ Description=Sidekick service for the instance {{ item }}
 BindsTo={{ item }}.service
 
 [Service]
-ExecStart=/bin/sh -c "while true; do etcdctl set /{{ namespace }}/groups/{{ name }}/{{ item }} '{\"ansible_ssh_host\": \"%H\"}' --ttl 60; sleep 45; done"
+ExecStart=/bin/bash -c 'export IP=$(docker inspect --format "{{ '{{ .NetworkSettings.IPAddress }}' }}" {{ item }}.service); while true; do etcdctl set /{{ namespace }}/groups/{{ name }}/{{ item }} {\\"ansible_ssh_host\\":\\"$IP\\"} --ttl 60; sleep 45; done'
 ExecStop=/usr/bin/etcdctl rm /{{ namespace }}/groups/{{ name }}/{{ item }}
 
 [X-Fleet]
