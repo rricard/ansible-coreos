@@ -1,0 +1,21 @@
+[Unit]
+Description=Instance {{ item }} of the service {{ name }}
+After=docker.service
+Requires=docker.service
+
+[Service]
+{% if persists %}
+ExecStart=/usr/bin/docker run --name instance-{{ item }} -i {{ image }}
+{% else %}
+ExecStart=/usr/bin/docker run -rm --name instance-{{ item }} -i {{ image }}
+ExecStop=/usr/bin/docker rm -f instance-{{ item }}
+{% endif %}
+
+[X-Fleet]
+{% if conflicts %}
+{% for other_instance in instances %}
+{% if item != other_instance %}
+X-Conflicts={{ other_instance }}.service
+{% endif %}
+{% endfor %}
+{% endif %}
