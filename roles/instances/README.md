@@ -33,7 +33,7 @@ Example
     instances:
     - node.0
     - node.1
-    - node.3
+    - node.2
 ```
 
 Dependencies
