@@ -1,7 +1,7 @@
 etcd_host: 172.17.8.101
 etcd_port: 4001
-ansible_ssh_host: 127.0.0.1
-ansible_ssh_port: 2222
+ansible_ssh_host: 172.17.8.101
+ansible_ssh_port: 22
 ansible_ssh_user: core
 ansible_python_interpreter: '/home/core/pypy-2.3.1-linux_x86_64-portable/bin/pypy'
 namespace: development
