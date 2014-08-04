@@ -1,0 +1,4 @@
+---
+- include: build.yml
+- include: start.yml
+- include: wire.yml

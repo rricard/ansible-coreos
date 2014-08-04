@@ -1,0 +1,16 @@
+---
+- name: Copy the systemd service templates
+  template: src=instance.service.j2 dest={{ item }}.service
+  with_items: instances
+
+- name: Copy the sidekick systemd service templates
+  template: src=sidekick.service.j2 dest={{ item }}.sidekick.service
+  with_items: instances
+
+- name: Submit the instances to fleet
+  shell: fleetctl submit {{ item }}.service {{ item }}.sidekick.service
+  with_items: instances
+
+- name: Start the instances on the fleet cluster
+  shell: fleetctl start {{ item }}.service {{ item }}.sidekick.service
+  with_items: instances
