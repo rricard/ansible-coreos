@@ -16,8 +16,8 @@ Role Variables
 | name         | `service`           | The service's name which will be run by fleet |
 | image        | `phusion/baseimage` | The image running inside docker               |
 | namespace    | `development`       | The etcd base path to register the instances  |
-| `conflicts`  | `True`              | Prevent similar instances from spawning on the same server |
-| `persists`   | `False`             | Try to persists the container state in case of shutdown (deprecated) |
+| conflicts    | `True`              | Prevent similar instances from spawning on the same server |
+| persists     | `False`             | Try to persists the container state in case of shutdown (deprecated) |
 | instances    | `service.0`         | The list of the anstance's names              |
 
 Example
