@@ -1,0 +1,8 @@
+---
+name: service
+image: phusion/baseimage
+namespace: development
+conflicts: True
+persists: False
+instances:
+- service.0
