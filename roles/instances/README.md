@@ -18,7 +18,7 @@ Role Variables
 | namespace    | `development`       | The etcd base path to register the instances  |
 | conflicts    | `True`              | Prevent similar instances from spawning on the same server |
 | persists     | `False`             | Tries to persist the container state in case of shutdown (deprecated) |
-| instances    | `['service.0']`     | The list of the anstance's names              |
+| instances    | `['service.0']`     | The list of the instance's names              |
 
 Example
 -------
